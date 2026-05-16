@@ -1,0 +1,12 @@
+{
+  "name": "vercel-browser-viewer",
+  "version": "1.1.0",
+  "description": "Vercel Build Fix Version",
+  "scripts": {
+    "install": "echo 'No install step needed'"
+  },
+  "dependencies": {
+    "@sparticuz/chromium": "^123.0.0",
+    "puppeteer-core": "^22.6.0"
+  }
+}

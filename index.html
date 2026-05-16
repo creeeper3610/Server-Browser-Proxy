@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Server Browser Proxy</title>
+    <style>
+        body { font-family: sans-serif; background: #f0f2f5; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .controls { display: flex; gap: 10px; margin-bottom: 20px; width: 100%; max-width: 600px; }
+        input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        button { padding: 10px 20px; background: #0070f3; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        #screen { width: 100%; max-width: 900px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); background: white; }
+    </style>
+</head>
+<body>
+    <h1>Server Browser Viewer</h1>
+    <div class="controls">
+        <input type="text" id="url" value="https://www.google.com">
+        <button onclick="start()">表示開始</button>
+    </div>
+    <img id="screen" src="" alt="Waiting for start...">
+    <script>
+        let itv = null;
+        function start() {
+            const url = document.getElementById('url').value;
+            const img = document.getElementById('screen');
+            const update = () => { img.src = `/api/screenshot?url=${encodeURIComponent(url)}&t=${Date.now()}`; };
+            update();
+            if (itv) clearInterval(itv);
+            itv = setInterval(update, 5000); // Vercelの負荷を考え5秒間隔に調整
+        }
+    </script>
+</body>
+</html>
